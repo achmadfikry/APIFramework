@@ -3,27 +3,74 @@ package stepDef;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
+import pojo.AddPlace;
+import pojo.Location;
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static io.restassured.RestAssured.given;
 
 public class StepDef {
+
+    RequestSpecification res;
+    ResponseSpecification resspec;
+    Response response;
+
     @Given("Add Place Payload")
     public void add_place_payload() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        RestAssured.baseURI = "https://rahulshettyacademy.com";
+        AddPlace addPlace = new AddPlace();
+        addPlace.setAccuracy(50);
+        addPlace.setName("Backline House");
+        addPlace.setPhone_number("(+91) 983 893 3937");
+        addPlace.setAddress("30, side layout, cohen 09");
+        addPlace.setWebsite("https://rahulshettyacademy.com");
+        addPlace.setLanguage("French-IN");
+
+        List<String> list = new ArrayList<>();
+        list.add("shoe park");
+        list.add("shop");
+        addPlace.setTypes(list);
+
+        Location location = new Location();
+        location.setLat(-38.283494);
+        location.setLng(33.437362);
+        addPlace.setLocation(location);
+
+        RequestSpecification req = new RequestSpecBuilder().setBaseUri("https://rahulshettyacademy.com").addQueryParam("key","qaclick123")
+                .setContentType(ContentType.JSON).build();
+
+        resspec = new ResponseSpecBuilder().expectStatusCode(200).expectContentType(ContentType.JSON).build();
+        res = given()
+                .spec(req)
+                .body(addPlace);
+
     }
     @When("user calls {string} with post http request")
     public void user_calls_with_post_http_request(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        response = res.when()
+                .post("/maps/api/place/add/json")
+                .then().spec(resspec).extract().response();
     }
     @Then("the API call got success with status code {int}")
     public void the_api_call_got_success_with_status_code(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertEquals(response.getStatusCode(), 200);
     }
     @Then("{string} in response body is {string}")
-    public void in_response_body_is(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void in_response_body_is(String key, String value) {
+        String resp =  response.asString();
+        JsonPath jsonPath = JsonPath.from(resp);
+        assertEquals(jsonPath.get(key).toString(), value);
     }
 
 }
