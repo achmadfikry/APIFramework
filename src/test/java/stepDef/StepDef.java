@@ -14,6 +14,7 @@ import io.restassured.specification.ResponseSpecification;
 import pojo.AddPlace;
 import pojo.Location;
 import resources.TestDataBuild;
+import resources.Utils;
 
 import static org.junit.Assert.*;
 
@@ -22,7 +23,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
-public class StepDef {
+public class StepDef extends Utils {
 
     RequestSpecification res;
     ResponseSpecification resspec;
@@ -32,14 +33,9 @@ public class StepDef {
 
     @Given("Add Place Payload")
     public void add_place_payload() {
-        RestAssured.baseURI = "https://rahulshettyacademy.com";
-
-        RequestSpecification req = new RequestSpecBuilder().setBaseUri("https://rahulshettyacademy.com").addQueryParam("key","qaclick123")
-                .setContentType(ContentType.JSON).build();
-
         resspec = new ResponseSpecBuilder().expectStatusCode(200).expectContentType(ContentType.JSON).build();
         res = given()
-                .spec(req)
+                .spec(reqSpec())
                 .body(data.addPlacePayload());
 
     }
