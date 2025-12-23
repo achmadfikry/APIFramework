@@ -13,6 +13,7 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import pojo.AddPlace;
 import pojo.Location;
+import resources.APIResources;
 import resources.TestDataBuild;
 import resources.Utils;
 
@@ -53,6 +54,28 @@ public class StepDef extends Utils {
         response = res.when()
                 .post("/maps/api/place/add/json")
                 .then().spec(resspec).extract().response();
+    }
+    @When("user calls {string} with {string} http request")
+    public void user_calls_with_http_request(String path, String httpMethod) {
+        APIResources resourceAPI = APIResources.valueOf(path);
+        System.out.println(resourceAPI.getResource());
+
+        resspec = new ResponseSpecBuilder().expectStatusCode(200).expectContentType(ContentType.JSON).build();
+
+        if(httpMethod.equalsIgnoreCase("POST"))
+            response = res.when()
+                    .post(resourceAPI.getResource());
+        else if (httpMethod.equalsIgnoreCase("GET"))
+            response = res.when()
+                    .get(resourceAPI.getResource());
+        else if (httpMethod.equalsIgnoreCase("PUT"))
+            response = res.when()
+                    .put(resourceAPI.getResource());
+        else if (httpMethod.equalsIgnoreCase("DELETE"))
+            response = res.when()
+                    .delete(resourceAPI.getResource());
+
+        //                .then().spec(resspec).extract().response();
     }
     @Then("the API call got success with status code {int}")
     public void the_api_call_got_success_with_status_code(Integer int1) {
