@@ -40,6 +40,13 @@ public class StepDef extends Utils {
                 .body(data.addPlacePayload());
 
     }
+    @Given("Add Place Payload with {string} {string} {string}")
+    public void add_place_payload_with(String name, String language, String address) throws IOException {
+        res = given()
+                .spec(reqSpec())
+                .body(data.addPlacePayloadWith(name, language, address));
+
+    }
     @When("user calls {string} with post http request")
     public void user_calls_with_post_http_request(String string) {
         resspec = new ResponseSpecBuilder().expectStatusCode(200).expectContentType(ContentType.JSON).build();

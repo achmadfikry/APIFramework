@@ -16,18 +16,18 @@ Body:
         "lng": 33.437362
     },
     "accuracy": 50,
-    "name": "Backline House",
+    "name": "AAhouse",
     "phone_number": "(+91) 983 893 3937",
-    "address": "30, side layout, cohen 09",
+    "address": "World Cross Center",
     "types": [
         "shoe park",
         "shop"
     ],
     "website": "https://rahulshettyacademy.com",
-    "language": "French-IN"
+    "language": "English"
 }
 HTTP/1.1 200 OK
-Date: Tue, 23 Dec 2025 06:24:48 GMT
+Date: Tue, 23 Dec 2025 06:53:37 GMT
 Server: Apache/2.4.52 (Ubuntu)
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
@@ -40,8 +40,8 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "status": "OK",
-    "place_id": "ef2ee28027e7df124b535bc4b05c659c",
+    "place_id": "8104dc2af84b248dad78b8170a8fff18",
     "scope": "APP",
-    "reference": "86ab7c8c4279b93f403437708ded54d086ab7c8c4279b93f403437708ded54d0",
-    "id": "86ab7c8c4279b93f403437708ded54d0"
+    "reference": "e63d0bb35bef3eee8360bc14236da8a4e63d0bb35bef3eee8360bc14236da8a4",
+    "id": "e63d0bb35bef3eee8360bc14236da8a4"
 }

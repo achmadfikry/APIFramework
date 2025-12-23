@@ -29,4 +29,25 @@ public class TestDataBuild {
 
         return addPlace;
     }
+    public AddPlace addPlacePayloadWith(String name, String language, String address){
+        AddPlace addPlace = new AddPlace();
+        addPlace.setAccuracy(50);
+        addPlace.setName(name);
+        addPlace.setPhone_number("(+91) 983 893 3937");
+        addPlace.setAddress(address);
+        addPlace.setWebsite("https://rahulshettyacademy.com");
+        addPlace.setLanguage(language);
+
+        List<String> list = new ArrayList<>();
+        list.add("shoe park");
+        list.add("shop");
+        addPlace.setTypes(list);
+
+        Location location = new Location();
+        location.setLat(-38.283494);
+        location.setLng(33.437362);
+        addPlace.setLocation(location);
+
+        return addPlace;
+    }
 }
