@@ -27,7 +27,7 @@ Body:
     "language": "French-IN"
 }
 HTTP/1.1 200 OK
-Date: Tue, 23 Dec 2025 04:40:51 GMT
+Date: Tue, 23 Dec 2025 06:24:48 GMT
 Server: Apache/2.4.52 (Ubuntu)
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST
@@ -40,8 +40,8 @@ Content-Type: application/json;charset=UTF-8
 
 {
     "status": "OK",
-    "place_id": "126082e06f5c4ec988d45f327492b048",
+    "place_id": "ef2ee28027e7df124b535bc4b05c659c",
     "scope": "APP",
-    "reference": "db03f9895fd07373618857fe152db888db03f9895fd07373618857fe152db888",
-    "id": "db03f9895fd07373618857fe152db888"
+    "reference": "86ab7c8c4279b93f403437708ded54d086ab7c8c4279b93f403437708ded54d0",
+    "id": "86ab7c8c4279b93f403437708ded54d0"
 }
