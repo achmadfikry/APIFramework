@@ -12,14 +12,17 @@ import java.util.Properties;
 
 public class Utils {
 
-    RequestSpecification req;
+    public static RequestSpecification req;
 
     public RequestSpecification reqSpec() throws IOException {
-        PrintStream log = new  PrintStream(new FileOutputStream("logging.txt"));
-        req = new RequestSpecBuilder().setBaseUri(getGlobalValue("baseUrl")).addQueryParam("key","qaclick123")
-                .addFilter(RequestLoggingFilter.logRequestTo(log))
-                .addFilter(ResponseLoggingFilter.logResponseTo(log))
-                .setContentType(ContentType.JSON).build();
+        if (req == null) {
+            PrintStream log = new  PrintStream(new FileOutputStream("logging.txt"));
+            req = new RequestSpecBuilder().setBaseUri(getGlobalValue("baseUrl")).addQueryParam("key","qaclick123")
+                    .addFilter(RequestLoggingFilter.logRequestTo(log))
+                    .addFilter(ResponseLoggingFilter.logResponseTo(log))
+                    .setContentType(ContentType.JSON).build();
+            return req;
+        }
         return req;
     }
 
