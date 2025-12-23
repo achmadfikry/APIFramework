@@ -31,7 +31,6 @@ public class StepDef extends Utils {
     RequestSpecification res;
     ResponseSpecification resspec;
     Response response;
-
     TestDataBuild data = new TestDataBuild();
 
     @Given("Add Place Payload")
@@ -83,9 +82,19 @@ public class StepDef extends Utils {
     }
     @Then("{string} in response body is {string}")
     public void in_response_body_is(String key, String value) {
-        String resp =  response.asString();
-        JsonPath jsonPath = JsonPath.from(resp);
-        assertEquals(jsonPath.get(key).toString(), value);
+        assertEquals(getJsonPath(response,key), value);
+    }
+
+    @Then("verify place_id created maps to {string} using {string}")
+    public void verify_place_id_created_maps_to_using(String expectedName, String resource) throws IOException {
+        //reqSpec
+        String place_id = getJsonPath(response,"place_id");
+        res = given()
+                .spec(reqSpec()).queryParam("place_id",place_id);
+        user_calls_with_http_request(resource, "GET");
+        String actualName = getJsonPath(response,"name");
+        assertEquals(actualName,expectedName);
+
     }
 
 }
