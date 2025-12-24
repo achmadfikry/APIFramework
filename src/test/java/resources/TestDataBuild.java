@@ -50,4 +50,10 @@ public class TestDataBuild {
 
         return addPlace;
     }
+
+    public String deletePlacePlayload(String place_id){
+        return "{\n" +
+                "    \"place_id\": \""+place_id+"\"\n" +
+                "}\n";
+    }
 }
